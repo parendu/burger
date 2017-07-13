@@ -65,14 +65,17 @@
  </div>
 	
 
-
-<form class="create-update-form" action="/burger/insertOne" method="POST"
-value={{this.data}}>
- <center> <div class="form-group">
-    <label for="burger"> </label>
-    <input type="text" id="add" name="burger_name">
-    <button type="submit">Add Burger</button>
-  </div>
-</form> </center>
-
+    <div class=row>
+	  <div class = "col-md-12">
+		<form class="create-update-form" action="/burger/insertOne" method="POST"
+		value={{this.data}}>
+		<center> 
+				<div class="form-group">
+					<label for="burger"> </label>
+					<input type="text" id="add" name="burger_name">
+					<button type="submit">Add Burger</button>
+				</div>
+		</form> </center>
+	   </div>
+	</div>
 </div>
