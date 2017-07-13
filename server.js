@@ -34,8 +34,12 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // now import the routes
-var routes = require('./controllers/burgers_controller.js');
+var routes = require('./controllers/burgers_controllers.js');
 app.use('/', routes);
+app.use("/updateOne",routes);
+app.use("/insertOne",routes);
+app.use("/delete",routes);
+
 
 // Initiate the listener.
 app.listen(PORT, function() {

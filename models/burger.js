@@ -14,15 +14,30 @@ var burger = {
 	
 
 	// insertOne for adding a new burger
-	insertOne: function(tableName, column, value, cb) {
-		orm.insertOne('burgers', column, value, function(res) {
+	insertOne: function(name, cb) {
+		orm.insertOne('burgers', ["burger_name", "devoured"],[name, false], function(res) {
 			cb(res);
 		});
 	},
 
 	// updateOne for changing the burger status
-	updateOne: function(devoured, burger_name, cb) {
-		orm.updateOne(devoured, burger_name, function(res) {
+	// updateOne: function(id, cb) {
+	// 	var condition = " id = " + id;
+	// 	orm.updateOne("burgers", {devoured : true}, condition, function(res) {
+	// 		cb(res);
+	// 	});
+
+		updateOne: function(objColVals, condition, cb) {
+		orm.updateOne('burgers', objColVals, condition, function(res) {
+			cb(res);
+		});
+	
+	
+},
+
+	delete: function(id,cb) {
+		var condition = " id = "  + id;
+		orm.delete("burgers",condition,function(res){
 			cb(res);
 		});
 	}

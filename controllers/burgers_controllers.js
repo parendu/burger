@@ -5,47 +5,58 @@ var burger = require("../models/burger.js");
 
 var router = express.Router();
 
-//root route
+//add router.get "/" to redirect to /index
 
 router.get('/', function(req, res) {
-	res.redirect('/index');
+	res.redirect('/burger');
 });
 
 
 
-// 
-router.get("/index", function(req, res){
- burger.selectAll(function(data){
-
- 	var hbsObject = {burgers: data};
- 	res.render('index', hbsObject);
- });
-
-});
 
 //route to index file and get data using selectALL
-router.get('/index', function(req, res) {
+router.get('/burger', function(req, res) {
 	burger.selectAll(function(data) {
 		var hbsObject = {burgers: data};
 		console.log(hbsObject);
-		res.render('index', hbsObject);
+		res.render('index.handlebars', hbsObject);
 	});
 });
 
 //post call route to /burgers/insertOne, insert datat in db
-router.post('/burgers/insertOne', function(req, res) {
-	burger.insertOne(['burger_name', 'devoured'], [req.body.name, false], function() {
-		res.redirect('/index');
+router.post('/burger/insertOne', function(req, res) {
+	burger.insertOne(req.body.burger_name, function(result) {
+		console.log(result)
+		res.redirect('/');
 	});
 });
 
 //update data using updateOne 
-router.put('/burgers/updateOne/:burger_name', function(req, res) {
-	
 
-	burger.updateOne({devoured: req.body.devoured}, req.params.burger_name, function() {
-		res.redirect('/index');
+	
+router.put('/burger/updateOne/:id', function(req, res) {
+	var condition = 'id = ' + req.params.id;
+	console.log('condition', condition);
+
+	burger.updateOne({devoured: req.body.devoured}, condition, function() {
+		res.redirect('/');
 	});
 });
+
+
+
+
+
+
+
+//delete route
+router.delete("/:id",function(req,res) {
+ 	var condition = req.params.id;
+ 	burger.delete(condition,function() {
+ 		res.redirect("/");
+ 	});
+
+ });
+
 
 module.exports = router;

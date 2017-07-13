@@ -1,10 +1,27 @@
 //set up database connection
 var mysql = require("mysql");
 
+
+
 //provide user/password and db info
-var connection = mysql.createConnection({
+var connection;
+
+// console.log(" connecting: JSWDB" + process.env.JAWSDB_URL);
+
+// if(process.env.JAWSDB_URL) {
+// 		console.log(" connecting: JSWDB" );
+
+// 	connection=mysql.createConnection(process.env.JAWSDB_URL);
+// } else {
+// 		console.log(" connecting: LOCAL" );
+
+
+
+
+	
+connection = mysql.createConnection({
 	host: "localhost",
-	PORT: 3000,
+	PORT: 3306,
 	user: "root",
 
 	password: "password",
